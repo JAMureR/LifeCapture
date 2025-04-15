@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Route;
 
 use App\Models\Image;
@@ -22,7 +23,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/image/save', [ImageController::class, 'save'])->name('image.save');
     Route::get('/image/file/{filename}', [ImageController::class, 'getImage'])->name('image.file');
     Route::get('/imagen/{id}', [ImageController::class, 'detail'])->name('image.detail');
-
+    Route::post('/comment/save', [CommentController::class, 'save'])->name('comment.save');
+    Route::get('/comment/delete/{id}', [CommentController::class, 'delete'])->name('comment.delete');
 });
 
 require __DIR__.'/auth.php';

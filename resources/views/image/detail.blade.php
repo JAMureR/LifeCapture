@@ -35,28 +35,51 @@
                             <p id="date-created">{{ $image->created_at }}</p>
                         </div>
 
-                        <!-- Contenedor flex para alinear los elementos horizontalmente -->
-                        <div class="flex justify-between items-center w-full mt-4">
-                            <!-- Botón de comentarios -->
-                            <h2 class="text-white">Comentarios ({{ count($image->comments) }})</h2>
-                            <hr>
-                            <form method="POST" action="">
-                                @csrf
-                                <input value="{{ $image->id }}" type="hidden" name="image_id" />
+                        <!-- Formulario de comentario: Alineado arriba, justo antes de los comentarios -->
+                        <form method="POST" action="{{ route('comment.save') }}" class="w-full mt-4">
+                            @csrf
+                            <input value="{{ $image->id }}" type="hidden" name="image_id" />
 
-                                <p class="flex items-center space-x-2">
-                                    <!-- El textarea más fino, con clases de Tailwind -->
-                                    <textarea placeholder="Añade un comentario..." required class="w-64 p-2 border rounded-md"></textarea>
+                            <div class="flex items-center space-x-2">
+                                <!-- Textarea más ancho y alineado a la izquierda -->
+                                <textarea name="content" placeholder="Añade un comentario..." required class="w-3/4 p-2 border rounded-md"></textarea>
 
-                                    <!-- Botón de "Publicar" alineado a la derecha -->
-                                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md">Publicar</button>
-                                </p>
-                            </form>
-
-                            <!-- Icono de corazón al lado derecho -->
-                            <div id="likes-detail">
-                                <img src="{{ asset('img/heart-red.png') }}" alt="Corazón" class="w-6 h-6 ml-4" />
+                                <!-- Botón de "Publicar" alineado a la izquierda -->
+                                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md">Publicar</button>
                             </div>
+
+                            <!-- Mensaje de error -->
+                            @error('content')
+                            <span class="text-red-500 text-sm mt-1">{{ $message }}</span>
+                            @enderror
+                        </form>
+
+                        <!-- Contenedor flex para organizar los comentarios -->
+                        <div class="flex flex-col w-full mt-4 space-y-4">
+                            <!-- Sección de comentarios -->
+                            <div class="w-full">
+                                <h2 class="text-white">Comentarios ({{ count($image->comments) }})</h2>
+                                <br>
+
+                                @foreach ($image->comments as $comment)
+                                <div id="comment" class="w-15 h-15 text-white text-xs">
+                                    <p>{{ '@' . $comment->user->nick . ' | ' . $comment->created_at }}</p>
+                                    <p>{{ $comment->content }}</p>
+
+                                    @if(Auth::check() && ($comment->user_id == Auth::user()->id || $comment->image->user_id == Auth::user()->id))
+                                        <a href="{{ route('comment.delete',['id'=> $comment->id]) }}" class=" underline">
+                                            Eliminar comentario
+                                        </a>
+                                    @endif
+                                </div>
+                                <br>
+                                @endforeach
+                            </div>
+                        </div>
+
+                        <!-- Icono de corazón alineado abajo -->
+                        <div id="likes-detail">
+                            <img src="{{ asset('img/heart-red.png') }}" alt="Corazón" class="w-6 h-6 ml-4" />
                         </div>
                     </div>
                     @endif
