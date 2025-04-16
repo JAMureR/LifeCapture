@@ -4,9 +4,11 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\LikeController;
 use Illuminate\Support\Facades\Route;
 
 use App\Models\Image;
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -25,6 +27,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/imagen/{id}', [ImageController::class, 'detail'])->name('image.detail');
     Route::post('/comment/save', [CommentController::class, 'save'])->name('comment.save');
     Route::get('/comment/delete/{id}', [CommentController::class, 'delete'])->name('comment.delete');
+    Route::get('/like/{image_id}', [LikeController::class, 'like'])->name('like.save');
+
 });
 
 require __DIR__.'/auth.php';
