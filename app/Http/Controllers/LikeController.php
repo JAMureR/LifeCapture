@@ -50,7 +50,7 @@ class LikeController extends Controller
             $like->delete();
             return response()->json([
                 'like' => $like,
-                'message' => 'has dado dislike '
+                'message' => 'Has dado dislike '
             ]);
 
         }else{

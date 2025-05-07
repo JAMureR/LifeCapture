@@ -79,7 +79,7 @@
 
                         <!-- Icono de corazón alineado abajo -->
                         <div id="likes-detail">
-                            <img src="{{ asset('img/heart-red.png') }}" alt="Corazón" class="w-6 h-6 ml-4" />
+                            <img src="{{ asset('img/heart-gray.png') }}" alt="Corazón" class="w-6 h-6 ml-4" />
                         </div>
                     </div>
                     @endif

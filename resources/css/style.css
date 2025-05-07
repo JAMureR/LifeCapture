@@ -47,3 +47,10 @@
     margin-right:90px ;
     
 }
+.number_likes{
+    color: black;
+    font-size:14px;
+    font-weight: bold;
+    position: relative;
+    top: -8px;
+}
