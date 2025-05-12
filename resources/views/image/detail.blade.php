@@ -67,9 +67,9 @@
                                     <p>{{ $comment->content }}</p>
 
                                     @if(Auth::check() && ($comment->user_id == Auth::user()->id || $comment->image->user_id == Auth::user()->id))
-                                        <a href="{{ route('comment.delete',['id'=> $comment->id]) }}" class=" underline">
-                                            Eliminar comentario
-                                        </a>
+                                    <a href="{{ route('comment.delete',['id'=> $comment->id]) }}" class=" underline">
+                                        Eliminar comentario
+                                    </a>
                                     @endif
                                 </div>
                                 <br>
@@ -77,9 +77,27 @@
                             </div>
                         </div>
 
-                        <!-- Icono de corazón alineado abajo -->
+                        <!-- Icono de corazón al lado derecho -->
                         <div id="likes-detail">
-                            <img src="{{ asset('img/heart-gray.png') }}" alt="Corazón" class="w-6 h-6 ml-4" />
+                            <!-- Comprobar si el usuario le dio like a la imagen -->
+                            <?php $user_like = false; ?>
+                            @foreach ($image->likes as $like)
+                                @if($like->user->id == Auth::user()->id)
+                                    <?php $user_like = true; ?>
+                                @endif
+                            @endforeach
+
+                            <!-- Mostrar imagen dependiendo de si el usuario ha dado like o no -->
+                            @if($user_like)
+                                <!-- Imagen para el "dislike" (corazón rojo) -->
+                                <img src="{{ asset('img/heart-red.png') }}" data-id="{{ $image->id }}" class="btn-dislike w-6 h-6 ml-4" />
+                            @else
+                                <!-- Imagen para el "like" (corazón gris) -->
+                                <img src="{{ asset('img/heart-gray.png') }}" data-id="{{ $image->id }}" class="btn-like w-6 h-6 ml-4" />
+                            @endif
+
+                            <!-- Mostrar la cantidad de likes -->
+                            <span class="number_likes">{{ count($image->likes) }}</span>
                         </div>
                     </div>
                     @endif

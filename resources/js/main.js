@@ -1,6 +1,7 @@
 var script = document.createElement('script');
 script.src = "https://code.jquery.com/jquery-3.6.0.min.js";
 document.head.appendChild(script);
+var url = "http://localhost:8000";
 
 script.onload = function () {
     window.addEventListener("load", function () {
@@ -14,7 +15,7 @@ script.onload = function () {
             $(document).on('click', '.btn-like', function () {
                 console.log('like');
                 $(this).addClass('btn-dislike').removeClass('btn-like');
-                $(this).attr('src', 'img/heart-red.png');
+                $(this).attr('src', url +'/img/heart-red.png');
 
                 
                 $.ajax({
@@ -36,7 +37,7 @@ script.onload = function () {
             $(document).on('click', '.btn-dislike', function () {
                 console.log('dislike');
                 $(this).addClass('btn-like').removeClass('btn-dislike');
-                $(this).attr('src', 'img/heart-gray.png');
+                $(this).attr('src', url +'/img/heart-gray.png');
 
                 $.ajax({
                     url: '/dislike/' + $(this).data('id'), // (ruta relativa),
