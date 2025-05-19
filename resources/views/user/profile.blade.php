@@ -8,9 +8,79 @@
 
     <div class="py-12">
         <div class="p-6 text-gray-900 dark:text-gray-100">
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 text-black">
+            <div class="grid grid-cols-1 gap-6 text-black">
+
+                <div id="profile-user" class="col-span-full" >
+
+                    @if($user->image)
+                    <div id="container-avatar">
+                        <img src="{{ route('user.avatar', ['filename' => $user->image]) }}" />
+                    </div>
+                    @endif
+
+                    <div id="user-info">
+                        <h1 class="text-3xl font-bold text-gray-800">{{'@'. $user->nick }}</h1>
+                        <h2 class="whitespace-nowrap text-xl text-gray-700">{{ $user->name . ' ' . $user->surname }}</h2>
+                        <p>{{ $user->description }}</p>
+                        
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+
+                <hr class=" col-span-full w-full border-t-2 border-gray-300 my-4">
+                
+               
+
                 @foreach ($user->images as $image)
-                     @include('includes.image', ['image' => $image])
+                   @if(!empty($image->image_path) && Storage::disk('images')->exists($image->image_path))
+                        <div class="relative bg-gray-900 rounded-lg shadow-md overflow-hidden w-full max-w-3xl mx-auto">
+                            <!-- Imagen de fondo -->
+                            <a href="{{ route('image.detail',['id'=> $image->id]) }}">
+                                <img class="w-full h-full object-cover" src="{{ route('image.file',['filename' => $image->image_path]) }}" alt="Imagen subida" />
+                            </a>
+
+                            <!-- Info usuario -->
+                            <div class="absolute bottom-0 left-0 w-full bg-white bg-opacity-50 p-4 flex flex-col items-start">
+                                <div class="flex items-center">
+                                    @if($image->user->image)
+                                        <img id="user-avatar" src="{{ route('user.avatar', ['filename' => $image->user->image]) }}" />
+                                    @endif
+                                    <a href="{{ route('profile', ['id' => $image->user->id]) }}">
+                                        <p class="font-semibold ml-2">
+                                            {{ '@' . $image->user->nick }}
+                                        </p>
+                                    </a>
+                                </div>
+
+                                <!-- Descripción -->
+                                <div class="description mt-2">
+                                    {{ $image->description }}
+                                    <p id="date-created">{{ $image->created_at }}</p>
+                                </div>
+
+                                <!-- Comentarios y likes -->
+                                <div class="flex justify-between items-center w-full mt-4">
+                                    <a id="btn-comments" href="{{ route('image.detail', ['id' => $image->id]) }}" class="bg-yellow-400 hover:bg-yellow-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md">
+                                        Comentarios ({{ count($image->comments) }})
+                                    </a>
+
+                                    <div id="likes">
+                                        @php
+                                            $user_like = $image->likes->contains('user_id', Auth::id());
+                                        @endphp
+
+                                        @if($user_like)
+                                            <img src="{{ asset('img/heart-red.png') }}" data-id="{{ $image->id }}" class="btn-dislike w-6 h-6 ml-4" />
+                                        @else
+                                            <img src="{{ asset('img/heart-gray.png') }}" data-id="{{ $image->id }}" class="btn-like w-6 h-6 ml-4" />
+                                        @endif
+
+                                        <span class="number_likes">{{ count($image->likes) }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
                 @endforeach
             </div>
         </div>
