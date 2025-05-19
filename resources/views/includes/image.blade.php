@@ -1,4 +1,10 @@
-@php $image = $like->image; @endphp
+@php
+    // Compatibilidad: si viene desde likes y no se ha pasado directamente $image
+    if (!isset($image) && isset($like)) {
+        $image = $like->image;
+    }
+@endphp
+
 
                     @if(!empty($image->image_path) && Storage::disk('images')->exists($image->image_path))
                         <div class="relative bg-gray-900 rounded-lg shadow-md overflow-hidden">
@@ -13,7 +19,11 @@
                                     @if($image->user->image)
                                         <img id="user-avatar" src="{{ route('user.avatar', ['filename' => $image->user->image]) }}" />
                                     @endif
-                                    <p class="font-semibold ml-2">{{ '@' . $image->user->nick }}</p>
+                                    <a href="{{ route('profile', ['id' => $image->user->id]) }}">
+                                        <p class="font-semibold ml-2">
+                                            {{ '@' . $image->user->nick }}
+                                        </p>
+                                    </a>
                                 </div>
 
                                 <!-- Descripción -->

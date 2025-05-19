@@ -29,9 +29,11 @@
 
                                     @endif
 
-                                    <p class="font-semibold ml-2">
-                                        {{ '@' . $image->user->nick }}
-                                    </p>
+                                    <a href="{{ route('profile', ['id' => $image->user->id]) }}">
+                                        <p class="font-semibold ml-2">
+                                            {{ '@' . $image->user->nick }}
+                                        </p>
+                                    </a>
 
 
                                 </div>
@@ -45,7 +47,7 @@
                                 <!-- Contenedor flex para alinear los elementos horizontalmente -->
                                 <div class="flex justify-between items-center w-full mt-4">
                                     <!-- Botón de comentarios -->
-                                    <a id="btn-comments" href="" class="bg-yellow-400 hover:bg-yellow-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md">
+                                    <a id="btn-comments" href="{{ route('image.detail',['id'=> $image->id]) }}" class="bg-yellow-400 hover:bg-yellow-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md">
                                         Comentarios ({{ count($image->comments) }})
                                     </a>
 

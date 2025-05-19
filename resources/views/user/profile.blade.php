@@ -2,7 +2,7 @@
     <x-slot name="header">
         @include('includes.message')
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Mi perfil') }}
+            {{ __('Perfil') }}
         </h2>
     </x-slot>
 
@@ -10,7 +10,7 @@
         <div class="p-6 text-gray-900 dark:text-gray-100">
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 text-black">
                 @foreach ($user->images as $image)
-                    
+                     @include('includes.image', ['image' => $image])
                 @endforeach
             </div>
         </div>
