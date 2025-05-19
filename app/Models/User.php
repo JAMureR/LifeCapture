@@ -49,4 +49,8 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function images(){
+         return $this->hasMany(\App\Models\Image::class);
+    }
 }

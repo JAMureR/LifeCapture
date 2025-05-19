@@ -18,6 +18,10 @@
                     {{ __('Subir imagen') }}
                 </x-nav-link>
                 
+                <x-nav-link :href="route('likes')" >
+                    {{ __('Likes') }}
+                </x-nav-link>
+
                 <x-nav-link :href >
                     @include('includes.avatar')
                 </x-nav-link>
@@ -38,7 +42,7 @@
                     </x-slot>
 
                     <x-slot name="content">
-                        <x-dropdown-link :href>
+                        <x-dropdown-link :href="route('profile', ['id' => Auth::user()->id])">
                             {{ __('Mi perfil') }}
                         </x-dropdown-link>
                         
@@ -52,7 +56,7 @@
                             <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                {{ __('Cerrrar sesión') }}
+                                {{ __('Cerrar sesión') }}
                             </x-dropdown-link>
                         </form>
                     </x-slot>
