@@ -35,6 +35,14 @@
                             <p id="date-created">{{ $image->created_at }}</p>
                         </div>
 
+                        @if(Auth::user() && Auth::user()->id == $image->user->id)
+                            <div class="actions"  >
+                                <a href="{{ route('image.delete',['id' => $image->id]) }}" class="underline text-white text-xs">Borrar foto</a>
+                                <a href="" class="underline text-white text-xs ml-4">Actualizar foto</a>
+                            </div>
+                        @endif
+
+
                         <!-- Formulario de comentario: Alineado arriba, justo antes de los comentarios -->
                         <form method="POST" action="{{ route('comment.save') }}" class="w-full mt-4">
                             @csrf
@@ -50,7 +58,7 @@
 
                             <!-- Mensaje de error -->
                             @error('content')
-                            <span class="text-red-500 text-sm mt-1">{{ $message }}</span>
+                                <span class="text-red-500 text-sm mt-1">{{ $message }}</span>
                             @enderror
                         </form>
 

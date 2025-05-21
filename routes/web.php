@@ -32,6 +32,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/dislike/{image_id}', [LikeController::class, 'dislike'])->name('like.delete');
     Route::get('/likes', [LikeController::class, 'index'])->name('likes');
     Route::get('/perfil/{id}', [UserController::class, 'profile'])->name('profile');
+    Route::get('/image/delete/{id}', [ImageController::class, 'delete'])->name('image.delete');
+
 });
 
 require __DIR__.'/auth.php';
