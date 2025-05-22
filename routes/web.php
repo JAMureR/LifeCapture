@@ -33,7 +33,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/likes', [LikeController::class, 'index'])->name('likes');
     Route::get('/perfil/{id}', [UserController::class, 'profile'])->name('profile');
     Route::get('/image/delete/{id}', [ImageController::class, 'delete'])->name('image.delete');
-
+    Route::get('/image/edit/{id}', [ImageController::class, 'edit'])->name('image.edit');
 });
 
 require __DIR__.'/auth.php';
