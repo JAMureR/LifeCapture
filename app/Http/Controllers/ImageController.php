@@ -69,7 +69,7 @@ class ImageController extends Controller
 
     public function delete($id){
         //Conseguir objeto del usuario identificad
-        $user = \Auth::user();
+        $user = Auth::user();
         $image = Image::find($id);
         $comments = Comment::where('image_id', $id)->get();
         $likes = Like::Where('image_id', $id)->get();
@@ -107,7 +107,7 @@ class ImageController extends Controller
 
     public function edit($id){
 
-        $user = \Auth::user();
+        $user = Auth::user();
         $image = Image::find($id);
 
         if($user && $image && $image->user->id == $user->id){
@@ -117,7 +117,43 @@ class ImageController extends Controller
         }else{
             return redirect()-> route('dashboard');
         }
- 
+    }
+
+    public function update (request $request){
+
+        //validacion
+        $request->validate([
+            'description' => 'required',
+            'image_path' => 'image'
+        ]);
+        //Recoger datos
+        $image_id = $request->input('image_id');
+        $description = $request->input('description');
+
+        //Recoger valores 
+        $user = Auth::user();
+        $image_path = $request->file('image_path');      
+        $description = $request->input('description');
+
+        //Conseguir Obgeto image
+        $image = Image::find($image_id);
+        $image->description = $description;
+
+         //subir fichero
+        if ($image_path) {
+            // Crear un nombre único para la imagen
+            $image_path_name = time() . $image_path->getClientOriginalName();
+            // Guarda el archivo en el disco 'images'
+            Storage::disk('images')->put($image_path_name, File::get($image_path));
+            $image->image_path = $image_path_name;
+        }
+        
+        // Actualizar registro
+        $image->update();
+        
+        return redirect()->route('image.detail',['id' => $image_id])
+                        ->with('message', 'La foto ha sido actualizada correctamente.');        
+        
 
     }
 }

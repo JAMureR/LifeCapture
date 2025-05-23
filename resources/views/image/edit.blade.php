@@ -8,17 +8,19 @@
     <div class="flex items-center justify-center mt-10 ">
         <!-- Recuadro alrededor del formulario -->
         <div class="bg-white p-6 rounded-lg shadow-lg border border-gray-300 w-full max-w-md">
-            <form class="mt-6 space-y-6" method="POST" action="" enctype="multipart/form-data">
+            <form class="mt-6 space-y-6" method="POST" action="{{ route('image.update') }}" enctype="multipart/form-data">
                 @csrf
+                <input type="hidden" name="image_id" value="{{ $image->id }}">
                 <!-- Campo para subir imagen -->
                 <div>
                     <x-input-label for="image_path" :value="__('Publicación')" />
                     @if($image->user->image)
-                        <img  src="{{ route('user.avatar', ['filename' => $image->user->image]) }}"
-                        class="w-100 h-100 " />
+                        <img class="w-100 h-100 object-cover"
+                                src="{{ route('image.file', ['filename' => $image->image_path]) }}" />
+                        
                     @endif
                     <input type="file" name="image_path" id="imagen" 
-                    class="mt-1 block w-full text-sm text-gray-900 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" required />
+                    class="mt-1 block w-full text-sm text-gray-900 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"  />
                     @error('image_path')
                     <span class="text-red-500 text-sm mt-1">{{ $message }}</span>
                     @enderror
