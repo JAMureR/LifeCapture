@@ -8,7 +8,13 @@ use App\Models\User;
 
 class UserController extends Controller
 {
-  
+   public function index(){
+        $users = User::orderBy('id','desc')->paginate(5);
+
+        return view ('user.index', [
+            'users' => $users
+        ]);
+    }
     public function profile($id)
     {
     $user = User::with('images')->findOrFail($id);

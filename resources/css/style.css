@@ -57,16 +57,16 @@
 #profile-user {
     
     display: flex;
-    align-items: center;      /* Centrado vertical */
+    
     justify-content: center;  /* Centrado horizontal */
     align-items: center; 
-    margin-bottom: 20px;
+    
     flex-wrap: nowrap;
 }
 
 #profile-user #container-avatar{
-    width: 220px;
-    height: 220px;
+    width: 120px;
+    height: 120px;
     
     flex-shrink: 0;
     border-radius: 900px;
@@ -81,5 +81,5 @@
 
 #profile-user #user-info{
     padding-left: 10px;
-
+    
 }

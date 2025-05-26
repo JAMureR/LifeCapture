@@ -10,18 +10,18 @@
         <div class="p-6 text-gray-900 dark:text-gray-100">
             <div class="grid grid-cols-1 gap-6 text-black">
 
-                <div id="profile-user" class="col-span-full" >
+                <div id="profile-user" class="col-span-full " >
 
                     @if($user->image)
-                    <div id="container-avatar">
-                        <img src="{{ route('user.avatar', ['filename' => $user->image]) }}" />
+                    <div id="container-avatar" >
+                        <img src="{{ route('user.avatar', ['filename' => $user->image]) }}" class="w-24 h-24 rounded-full object-cover"/>
                     </div>
                     @endif
 
                     <div id="user-info">
                         <h1 class="text-3xl font-bold text-gray-800">{{'@'. $user->nick }}</h1>
                         <h2 class="whitespace-nowrap text-xl text-gray-700">{{ $user->name . ' ' . $user->surname }}</h2>
-                        <p>{{ $user->description }}</p>
+                        
                         
                     </div>
                 </div>

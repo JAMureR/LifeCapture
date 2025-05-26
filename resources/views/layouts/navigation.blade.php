@@ -22,6 +22,10 @@
                     {{ __('Likes') }}
                 </x-nav-link>
 
+                <x-nav-link :href="route('user.index')" >
+                    {{ __('Personas') }}
+                </x-nav-link>
+
                 <x-nav-link :href >
                     @include('includes.avatar')
                 </x-nav-link>
