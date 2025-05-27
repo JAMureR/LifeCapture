@@ -15,6 +15,8 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+
+//Rutas Generales
 // Rutas protegidas por autenticación
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
@@ -35,7 +37,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/image/delete/{id}', [ImageController::class, 'delete'])->name('image.delete');
     Route::get('/image/edit/{id}', [ImageController::class, 'edit'])->name('image.edit');
     Route::post('/image/update', [ImageController::class, 'update'])->name('image.update');
-    Route::get('/personas', [UserController::class, 'index'])->name('user.index');
+    Route::get('/personas/{search?}', [UserController::class, 'index'])->name('user.index');
 });
 
 require __DIR__.'/auth.php';
