@@ -110,3 +110,37 @@
     padding-left: 10px;
 
 }
+
+.logo {
+  width: 100px;        /* Ajusta el tamaño */
+  height: auto;        /* Mantiene la proporción */
+  display: block;      /* Elimina espacio extra */
+  margin: 0 auto;      /* Centrado horizontal */
+  border-radius: 12px; /* Bordes redondeados */
+  transition: transform 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.05); /* Efecto al pasar el cursor */
+}
+
+.logo_login {
+  width: 400px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+     margin-bottom: 0;
+  /* Solución para eliminar el marco invisible inferior */
+  vertical-align: bottom; /* o top / middle, según cómo se alinee mejor */
+  
+  
+}
+
+.logo-wrapper {
+  width: 400px;
+  height: 300px;       /* 🔥 Aquí defines cuánto recortas (ej: recortas 50px arriba y 50px abajo) */
+  overflow: hidden;    /* Oculta lo que se sale */
+  margin: 0 auto;
+}
