@@ -19,16 +19,47 @@
                                 src="{{ route('image.file', ['filename' => $image->image_path]) }}" alt="Imagen subida" />
                         </div>
 
-                        <!-- Capa de superposición para el nick y el avatar (debajo de la imagen) -->
-                        <div class="bg-gray-900 bg-opacity-80 p-4 rounded-b-lg w-full md:w-3/4 mx-auto mt-4">
+                        <!-- nick y el avatar (debajo de la imagen) -->
+                        <div class="bg-gray-600 bg-opacity-80 p-4 rounded-b-lg w-full md:w-3/4 mx-auto mt-4">
                             <div class="flex items-center">
                                 @if($image->user->image)
                                     <img id="user-avatar" src="{{ route('user.avatar', ['filename' => $image->user->image]) }}"
                                         class="w-8 h-8 rounded-full" />
                                 @endif
                                 <p class="font-semibold ml-2 text-white">
-                                    {{ '@' . $image->user->nick }}
+                                    {{ '@' . $image->user->nick }}                                   
                                 </p>
+                                <p class="font-semibold text-xs ml-2 text-white">
+                                    {{ $image->user->name }} {{ $image->user->surname }}                                  
+                                </p>
+
+                                <!-- Boton like -->
+                                <div id="likes" class="flex items-center ml-auto">
+                                    <!-- Comprobar si el usuario le dio like a la imagen -->
+                                    <?php    $user_like = false; ?>
+                                    @foreach ($image->likes as $like)
+                                        @if($like->user->id == Auth::user()->id)
+                                            <?php            $user_like = true; ?>
+                                        @endif
+                                    @endforeach
+
+                                    <!-- Mostrar imagen dependiendo de si el usuario ha dado like o no -->
+                                    @if($user_like)
+                                        <!-- Imagen para el "dislike" (corazón rojo) -->
+                                        <img src="{{ asset('img/heart-red.png') }}" data-id="{{ $image->id }}"
+                                            class="btn-dislike w-8 h-8 ml-4" />
+                                    @else
+                                        <!-- Imagen para el "like" (corazón gris) -->
+                                        <img src="{{ asset('img/heart-gray.png') }}" data-id="{{ $image->id }}"
+                                            class="btn-like w-8 h-8 ml-4" />
+                                    @endif
+
+                                    <!-- Mostrar la cantidad de likes -->
+                                    <div id="like-count" class="ml-2 relative top-1.5 ">
+                                        <span class="number_likes_detail">{{ count($image->likes) }}</span>
+                                    </div>
+                                </div>
+
                             </div>
 
                             <!-- Descripción en su propia capa -->
@@ -78,6 +109,7 @@
                             @endif
 
 
+
                             <!-- Formulario de comentario: Alineado arriba, justo antes de los comentarios -->
                             <form method="POST" action="{{ route('comment.save') }}" class="w-full mt-4">
                                 @csrf
@@ -122,30 +154,7 @@
                                 </div>
                             </div>
 
-                            <!-- Icono de corazón al lado derecho -->
-                            <div id="likes-detail">
-                                <!-- Comprobar si el usuario le dio like a la imagen -->
-                                <?php    $user_like = false; ?>
-                                @foreach ($image->likes as $like)
-                                    @if($like->user->id == Auth::user()->id)
-                                        <?php            $user_like = true; ?>
-                                    @endif
-                                @endforeach
 
-                                <!-- Mostrar imagen dependiendo de si el usuario ha dado like o no -->
-                                @if($user_like)
-                                    <!-- Imagen para el "dislike" (corazón rojo) -->
-                                    <img src="{{ asset('img/heart-red.png') }}" data-id="{{ $image->id }}"
-                                        class="btn-dislike w-6 h-6 ml-4" />
-                                @else
-                                    <!-- Imagen para el "like" (corazón gris) -->
-                                    <img src="{{ asset('img/heart-gray.png') }}" data-id="{{ $image->id }}"
-                                        class="btn-like w-6 h-6 ml-4" />
-                                @endif
-
-                                <!-- Mostrar la cantidad de likes -->
-                                <span class="number_likes">{{ count($image->likes) }}</span>
-                            </div>
                         </div>
                     @endif
 

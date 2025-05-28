@@ -71,6 +71,14 @@
     top: -8px;
 }
 
+.number_likes_detail {
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    position: relative;
+    top: -8px;
+}
+
 #profile-user {
 
     display: flex;

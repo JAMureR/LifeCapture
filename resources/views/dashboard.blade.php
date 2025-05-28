@@ -72,8 +72,6 @@
                                         <div id="like-count" class="ml-2 relative top-1.5">
                                             <span class="number_likes">{{ count($image->likes) }}</span>
                                         </div>
-                                        
-
                                     </div>
                                 </div>
                             </div>
