@@ -62,10 +62,10 @@
                                         <!-- Mostrar imagen dependiendo de si el usuario ha dado like o no -->
                                         @if($user_like)
                                         <!-- Imagen para el "dislike" (corazón rojo) -->
-                                        <img src="{{ asset('img/heart-red.png') }}" data-id="{{ $image->id }}" class="btn-dislike w-6 h-6 ml-4" />
+                                        <img src="{{ asset('img/heart-red.png') }}" data-id="{{ $image->id }}" class="btn-dislike w-8 h-8 ml-4" />
                                         @else
                                         <!-- Imagen para el "like" (corazón gris) -->
-                                        <img src="{{ asset('img/heart-gray.png') }}" data-id="{{ $image->id }}" class="btn-like w-6 h-6 ml-4" />
+                                        <img src="{{ asset('img/heart-gray.png') }}" data-id="{{ $image->id }}" class="btn-like w-7 h-7 ml-4" />
                                         @endif
 
                                         <!-- Mostrar la cantidad de likes -->                        
