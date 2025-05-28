@@ -37,18 +37,16 @@
 
 
                                 </div>
+                                
+                                
+                                
 
-                                <!-- Descripción en su propia capa -->
-                                <div class="description mt-2">
-                                    {{ $image->description }}
-                                    <p id="date-created">{{ $image->created_at }}</p>
-                                </div>
-
+                                
                                 <!-- Contenedor flex para alinear los elementos horizontalmente -->
                                 <div class="flex justify-between items-center w-full mt-4">
                                     <!-- Botón de comentarios -->
-                                    <a id="btn-comments" href="{{ route('image.detail',['id'=> $image->id]) }}" class="bg-yellow-400 hover:bg-yellow-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md">
-                                        Comentarios ({{ count($image->comments) }})
+                                    <a id="btn-comments" href="{{ route('image.detail',['id'=> $image->id]) }}" class="inline-flex items-center bg-gray-400 hover:bg-yellow-500 text-white text-sm font-semibold py-2 px-4 rounded-lg shadow-md">
+                                         Comentarios&nbsp;({{ count($image->comments) }})
                                     </a>
 
                                     <!-- Icono de corazón al lado derecho -->

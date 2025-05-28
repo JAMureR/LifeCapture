@@ -1,9 +1,15 @@
 <x-app-layout>
     <x-slot name="header">
         @include('includes.message')
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Personas') }}
-        </h2>
+        <div class="flex items-center gap-4">
+            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                {{ __('Personas') }}
+            </h2>
+            <form method="GET" action="{{ route('user.index') }}" class="flex items-center gap-2">
+                <input type="text" id="search" name="search" class="border rounded px-2 py-1 text-sm"   >
+                <input type="submit" value="Buscar" class="text-sm underline cursor-pointer"></input>
+            </form>
+        </div>
     </x-slot>
 
 

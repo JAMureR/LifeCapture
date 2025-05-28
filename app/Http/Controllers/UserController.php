@@ -8,13 +8,16 @@ use App\Models\User;
 
 class UserController extends Controller
 {
-   public function index($search = null){
+   public function index(Request $request){
+
+         $search = $request->input('search');
+
         if(!empty($search)){
              $users = User::where('nick','LIKE', '%'.$search.'%')
-                                ->orWhere('name', 'LIKE','%'.$search.'%')
-                                ->orWhere('surname', 'LIKE','%'.$search.'%')
-                                ->orderBy('id','desc') 
-                                ->paginate(5);
+                            ->orWhere('name', 'LIKE','%'.$search.'%')
+                            ->orWhere('surname', 'LIKE','%'.$search.'%')
+                            ->orderBy('id','desc') 
+                            ->paginate(5);
                                     
 
         }else{
