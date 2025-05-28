@@ -21,16 +21,16 @@
                                 <img class="w-full h-full object-cover" src="{{ route('image.file',['filename' => $image->image_path]) }}" alt="Imagen subida" />
                             </a>
                             <!-- Capa de superposición para el nick y el avatar -->
-                            <div class="absolute bottom-0 left-0 w-full bg-white bg-opacity-50 p-4 flex flex-col items-start">
-                                <div class="flex items-center">
+                            <div id="container-info" class="absolute bottom-0 left-0 w-full  bg-white bg-opacity-70 p-4 flex flex-col items-start">
+                                <div class="flex items-center ">
                                     @if($image->user->image)
 
-                                    <img id="user-avatar" src="{{ route('user.avatar', ['filename' => $image->user->image]) }}" />
+                                    <img id="user-avatar"   src="{{ route('user.avatar', ['filename' => $image->user->image]) }}" />
 
                                     @endif
 
                                     <a href="{{ route('profile', ['id' => $image->user->id]) }}">
-                                        <p class="font-semibold ml-2">
+                                        <p class="font-semibold ml-2 ">
                                             {{ '@' . $image->user->nick }}
                                         </p>
                                     </a>
@@ -50,7 +50,7 @@
                                     </a>
 
                                     <!-- Icono de corazón al lado derecho -->
-                                    <div id="likes">
+                                    <div id="likes" class="flex items-center">
                                         <!-- Comprobar si el usuario le dio like a la imagen -->
                                         <?php $user_like = false; ?>
                                         @foreach ($image->likes as $like)
@@ -68,8 +68,12 @@
                                         <img src="{{ asset('img/heart-gray.png') }}" data-id="{{ $image->id }}" class="btn-like w-6 h-6 ml-4" />
                                         @endif
 
-                                        <!-- Mostrar la cantidad de likes -->
-                                        <span class="number_likes">{{ count($image->likes) }}</span>
+                                        <!-- Mostrar la cantidad de likes -->                        
+                                        <div id="like-count" class="ml-2 relative top-1.5">
+                                            <span class="number_likes">{{ count($image->likes) }}</span>
+                                        </div>
+                                        
+
                                     </div>
                                 </div>
                             </div>

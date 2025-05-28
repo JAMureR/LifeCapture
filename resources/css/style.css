@@ -3,83 +3,102 @@
     width: 55px;
     height: 55px;
     border-radius: 50%;
-    overflow: hidden; /* Asegura que la imagen no sobresalga */
+    overflow: hidden;
+    /* Asegura que la imagen no sobresalga */
     display: flex;
     margin-right: 0;
     justify-content: right;
-    border: 2px solid white; /* Añade un borde blanco */
+    border: 2px solid white;
+    /* Añade un borde blanco */
 }
 
 .avatar,
 .pub_image .container-avatar {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Evita que la imagen se deforme */
+    object-fit: cover;
+    /* Evita que la imagen se deforme */
 
 }
+
 #user-avatar {
     border-radius: 50%;
     width: 50px;
     height: 50px;
     border: 2px solid #4CAF50;
-    float:left;
-    margin-right:-5px;
-    
-}
-#nick-pag-ini{
-    line-height:50px;
+    float: left;
+    margin-right: -5px;
+
 }
 
-#btn-comments{
+#nick-pag-ini {
+    line-height: 50px;
+}
+
+#container-info{
+    height: 120px;
+}
+
+
+#btn-comments {
     width: 130px;
     height: 30px;
 }
 
-#likes{
-    margin-right:20px ;
+#likes {
+    
+    margin-right: 20px;
 }
 
-#date-created{
+#like-count {
+
+}
+
+#date-created {
     font-size: 11px;
 }
 
-#likes-detail{
-    margin-right:90px ;
-    
+#likes-detail {
+    margin-right: 90px;
+
 }
-.number_likes{
+
+.number_likes {
     color: black;
-    font-size:14px;
+    font-size: 14px;
     font-weight: bold;
     position: relative;
     top: -8px;
 }
+
 #profile-user {
-    
+
     display: flex;
-    
-    justify-content: center;  /* Centrado horizontal */
-    align-items: center; 
-    
+
+    justify-content: center;
+    /* Centrado horizontal */
+    align-items: center;
+
     flex-wrap: nowrap;
 }
 
-#profile-user #container-avatar{
+#profile-user #container-avatar {
     width: 120px;
     height: 120px;
-    
+
     flex-shrink: 0;
     border-radius: 900px;
     overflow: hidden;
-    
-}
-#profile-user #container-avatar img{
-    width: 100%;
-    height: 100%;
-    
+
 }
 
-#profile-user #user-info{
+#profile-user #container-avatar img {
+    width: 100%;
+    height: 100%;
+
+}
+
+#profile-user #user-info {
     padding-left: 10px;
-    
+
 }
