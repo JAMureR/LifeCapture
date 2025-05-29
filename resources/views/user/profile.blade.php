@@ -60,22 +60,33 @@
 
                                 <!-- Comentarios y likes -->
                                 <div class="flex justify-between items-center w-full mt-4">
-                                    <a id="btn-comments" href="{{ route('image.detail', ['id' => $image->id]) }}" class="bg-yellow-400 hover:bg-yellow-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md">
-                                        Comentarios ({{ count($image->comments) }})
+                                    <a id="btn-comments" href="{{ route('image.detail', ['id' => $image->id]) }}"  class="inline-flex items-center bg-gray-400 hover:bg-yellow-500 text-white text-sm font-semibold py-2 px-4 rounded-lg shadow-md">
+                                        Comentarios&nbsp;({{ count($image->comments) }})
                                     </a>
 
-                                    <div id="likes">
-                                        @php
-                                            $user_like = $image->likes->contains('user_id', Auth::id());
-                                        @endphp
+                                    <!-- Icono de corazón al lado derecho -->
+                                    <div id="likes" class="flex items-center">
+                                        <!-- Comprobar si el usuario le dio like a la imagen -->
+                                        <?php $user_like = false; ?>
+                                        @foreach ($image->likes as $like)
+                                        @if($like->user->id == Auth::user()->id)
+                                        <?php $user_like = true; ?>
+                                        @endif
+                                        @endforeach
 
+                                        <!-- Mostrar imagen dependiendo de si el usuario ha dado like o no -->
                                         @if($user_like)
-                                            <img src="{{ asset('img/heart-red.png') }}" data-id="{{ $image->id }}" class="btn-dislike w-6 h-6 ml-4" />
+                                        <!-- Imagen para el "dislike" (corazón rojo) -->
+                                        <img src="{{ asset('img/heart-red.png') }}" data-id="{{ $image->id }}" class="btn-dislike w-8 h-8 ml-4" />
                                         @else
-                                            <img src="{{ asset('img/heart-gray.png') }}" data-id="{{ $image->id }}" class="btn-like w-6 h-6 ml-4" />
+                                        <!-- Imagen para el "like" (corazón gris) -->
+                                        <img src="{{ asset('img/heart-gray.png') }}" data-id="{{ $image->id }}" class="btn-like w-7 h-7 ml-4" />
                                         @endif
 
-                                        <span class="number_likes">{{ count($image->likes) }}</span>
+                                        <!-- Mostrar la cantidad de likes -->                        
+                                        <div id="like-count" class="ml-2 relative top-1.5">
+                                            <span class="number_likes">{{ count($image->likes) }}</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

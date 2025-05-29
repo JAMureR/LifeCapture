@@ -30,6 +30,7 @@ Route::middleware('auth')->group(function () {
     //Perfil
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::get('/user/avatar/{filename}', [ProfileController::class, 'getImage'])->name('user.avatar');
 
     //Imagen
