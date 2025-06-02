@@ -11,8 +11,8 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Image;
 
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
+Route::get('/', function () {
+    return redirect()->route('login');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
