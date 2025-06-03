@@ -21,7 +21,7 @@ Route::get('/', function () {
 Route::middleware('auth')->group(function () {
 
     //Home
-        Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
 
     //Usuario
     Route::get('/perfil/{id}', [UserController::class, 'profile'])->name('profile');
