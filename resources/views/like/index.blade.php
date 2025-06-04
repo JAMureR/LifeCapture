@@ -2,7 +2,7 @@
     <x-slot name="header">
         @include('includes.message')
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Publicaciones a las que has dado like') }}
+            {{ __('Publicaciones que te gustan') }}
         </h2>
     </x-slot>
 
