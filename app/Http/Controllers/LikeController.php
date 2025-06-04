@@ -14,7 +14,7 @@ class LikeController extends Controller
     $likes = Like::with('image.user', 'image.comments.user', 'image.likes') // <- Eager loading completo
                  ->where('user_id', $user->id)
                  ->orderBy('id', 'desc')
-                 ->paginate(5);
+                 ->paginate(8);
 
     return view('like.index', [
         'likes' => $likes
