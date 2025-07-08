@@ -13,8 +13,14 @@ RUN apt-get update && apt-get install -y \
 # Habilita el módulo de reescritura de Apache
 RUN a2enmod rewrite
 
+# Instala Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
 # Copia el código fuente
 COPY . /var/www/html
+
+# Ejecuta composer install para instalar dependencias de Laravel
+RUN cd /var/www/html && composer install --no-interaction --prefer-dist --optimize-autoloader
 
 # Establece la carpeta de trabajo
 WORKDIR /var/www/html
