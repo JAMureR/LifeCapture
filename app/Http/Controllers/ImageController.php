@@ -7,9 +7,9 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
-use App\models\Like;
-use App\models\Image;
-use App\models\Comment;
+use App\Models\Like;
+use App\Models\Image;
+use App\Models\Comment;
 
 class ImageController extends Controller
 {
