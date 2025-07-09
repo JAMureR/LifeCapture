@@ -7,14 +7,12 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Auth;
 use App\Models\Image;
 
-
 Route::get('/', function () {
-    return redirect()->route('login');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
+    return Auth::check() ? redirect()->route('dashboard') : redirect()->route('login');
+});
 
 //Rutas Generales
 // Rutas protegidas por autenticación
