@@ -11,8 +11,17 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js','resources/css/app.css', 'resources/js/app.js'])
+        <!-- Scripts VITE DESACTIVADOS PARA ASSETS EN HOSTINGUER
+        @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/main.js', 'resources/css/style.css'])-->
+
+    <!--NUEVOS LINKS PARA COMPLIACION EN SUBCARPETA DE LIFECAPUTE EN HOSTINGUER-->
+
+    <link rel="stylesheet" href="{{ asset('build/assets/app-DLeKCgwp.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/assets/app-DX4crK43.css') }}">
+
+    <script src="{{ asset('build/assets/app-Du8iItK3.js') }}" defer></script>
+    <script src="{{ asset('build/assets/main-SjaNfK8j.js') }}" defer></script>
+
     </head>
     <body class="font-sans text-gray-900 antialiased">
         <div class="min-h-screen flex flex-col sm:justify-center items-center py-0 sm:pt-0 bg-gray-100 dark:bg-gray-900">
